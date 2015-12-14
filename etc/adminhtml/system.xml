@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Vladan Kuzmanovic (vladankuzmanovic@gmail.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="sales">
+            <group id="autoordercancel" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Auto Order Cancel</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="order_statuses" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Statuses to be Canceled</label>
+                    <source_model>Kuzman\AutoOrderCancel\Model\Order\Status\Source</source_model>
+                </field>
+                <field id="older_than" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cancel Orders Older Than (minutes)</label>
+                    <validate>required-entry validate-digits</validate>
+                </field>
+                <field id="recent_than" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cancel Orders Recent Than (minutes)</label>
+                    <validate>required-entry validate-digits</validate>
+                </field>
+                <field id="comment" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order History Comment</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

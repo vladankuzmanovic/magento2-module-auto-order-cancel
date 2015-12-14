@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author	    Vladan Kuzmanovic (vladankuzmanovic@gmail.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sales>
+            <autoordercancel>
+                <enabled>0</enabled>
+                <order_statuses></order_statuses>
+                <older_than>60</older_than>
+                <recent_than>10080</recent_than>
+                <comment>Order was automatically cancelled</comment>
+            </autoordercancel>
+        </sales>
+    </default>
+</config>

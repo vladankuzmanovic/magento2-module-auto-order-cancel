@@ -1,0 +1,22 @@
+{
+  "name": "kuzman/autoordercancel",
+  "description": "Mage2 extension to cancel orders automatically based on configuration.",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0"
+  ],
+  "require": {
+    "php": "~5.5.0|~5.6.0",
+    "magento/magento-composer-installer": "*",
+    "magento/module-sales": "*"
+  },
+  "extra": {
+    "map": [
+      [
+        "*",
+        "Kuzman/AutoOrderCancel"
+      ]
+    ]
+  }
+}
