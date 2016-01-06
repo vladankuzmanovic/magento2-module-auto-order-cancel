@@ -1,15 +1,15 @@
 <?php
 /**
- * @author	    Vladan Kuzmanovic (vladankuzmanovic@gmail.com)
+ * @author  Vladan Kuzmanovic (vladankuzmanovic@gmail.com)
  */
-namespace Kuzman\AutoOrderCancel\Model;
+namespace Kuzman\AutoOrderCancel\Helper;
 
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Escaper;
 
-class Config
+class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     /**#@+
      * Minimum advertise price constants

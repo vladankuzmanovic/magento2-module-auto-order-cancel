@@ -2,9 +2,9 @@
 /**
  * @author	    Vladan Kuzmanovic (vladankuzmanovic@gmail.com)
  */
-namespace Kuzman\AutoOrderCancel\Model\Order\Status;
+namespace Kuzman\AutoOrderCancel\Model\Config\Source\Order;
 
-class Source extends \Magento\Sales\Model\Config\Source\Order\Status
+class Status extends \Magento\Sales\Model\Config\Source\Order\Status
 {
     protected $_stateStatuses = [];
     /**

@@ -15,7 +15,7 @@
                 </field>
                 <field id="order_statuses" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Order Statuses to be Canceled</label>
-                    <source_model>Kuzman\AutoOrderCancel\Model\Order\Status\Source</source_model>
+                    <source_model>Kuzman\AutoOrderCancel\Model\Config\Source\Order\Status</source_model>
                 </field>
                 <field id="older_than" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Cancel Orders Older Than (minutes)</label>

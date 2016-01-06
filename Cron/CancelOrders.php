@@ -12,9 +12,9 @@ class CancelOrders
     protected $orderCollectionFactory;
 
     /**
-     * @var \Kuzman\AutoOrderCancel\Model\Config
+     * @var \Kuzman\AutoOrderCancel\Helper\Data
      */
-    protected $config;
+    protected $helper;
 
     /**
      * @var \Psr\Log\LoggerInterface
@@ -23,11 +23,11 @@ class CancelOrders
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
-        \Kuzman\AutoOrderCancel\Model\Config $config,
+        \Kuzman\AutoOrderCancel\Helper\Data $helper,
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $collectionFactory
     )
     {
-        $this->config = $config;
+        $this->helper = $helper;
         $this->logger = $logger;
         $this->orderCollectionFactory = $collectionFactory;
     }
@@ -40,12 +40,12 @@ class CancelOrders
      */
     public function execute()
     {
-        $isEnabled = $this->config->isEnabled();
+        $isEnabled = $this->helper->isEnabled();
         if($isEnabled){
-            $statuses = $this->config->getOrderStatuses();
-            $olderThan = $this->config->getOlderThan();
-            $recentThan = $this->config->getRecentThan();
-            $comment = $this->config->getComment();
+            $statuses = $this->helper->getOrderStatuses();
+            $olderThan = $this->helper->getOlderThan();
+            $recentThan = $this->helper->getRecentThan();
+            $comment = $this->helper->getComment();
 
             $orders = $this->orderCollectionFactory->create();
             $orders->addFieldToFilter('status', ['in' => $statuses]);
