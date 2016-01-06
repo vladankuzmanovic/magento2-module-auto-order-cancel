@@ -2,16 +2,9 @@
 /**
  * @author	    Vladan Kuzmanovic (vladankuzmanovic@gmail.com)
  */
-namespace Kuzman\AutoOrderCancel\Model;
+namespace Kuzman\AutoOrderCancel\Cron;
 
-use Magento\Cron\Model\Schedule;
-
-/**
- * Newsletter module observer
- *
- * @SuppressWarnings(PHPMD.LongVariable)
- */
-class Observer
+class CancelOrders
 {
     /**
      * @var \Magento\Sales\Model\ResourceModel\Order\CollectionFactory
@@ -45,7 +38,7 @@ class Observer
      * @return void
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function cancelOrders()
+    public function execute()
     {
         $isEnabled = $this->config->isEnabled();
         if($isEnabled){
@@ -72,7 +65,7 @@ class Observer
                 try {
                     $order->cancel();
                     $order->addStatusHistoryComment($comment)
-                          ->setIsCustomerNotified(false);
+                        ->setIsCustomerNotified(false);
                     $order->save();
                 } catch(\Exception $e){
                     $this->logger->critical($e);
