@@ -1,6 +1,6 @@
 {
   "name": "kuzman/module-auto-order-cancel",
-  "description": "Adds posibility to add an answer to the customer review",
+  "description": "Cancel orders automatically based on configuratio",
   "type": "magento2-module",
   "version": "1.0.0",
   "license": [
