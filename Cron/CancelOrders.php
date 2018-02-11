@@ -57,21 +57,30 @@ class CancelOrders
         $isEnabled = $this->helper->isEnabled();
         if($isEnabled){
             $statuses = $this->helper->getOrderStatuses();
+            $methods = $this->helper->getPaymentMethods();
             $olderThan = $this->helper->getOlderThan();
             $recentThan = $this->helper->getRecentThan();
             $comment = $this->helper->getComment();
 
             $orders = $this->orderCollectionFactory->create();
+            $orders->getSelect()->join(
+                ['payment' => "sales_order_payment"],
+                'main_table.entity_id = payment.parent_id',
+                ['method']
+            );
+
             $orders->addFieldToFilter('status', ['in' => $statuses]);
+            $orders->addFieldToFilter('method', ['in' => $methods]);
             $orders->getSelect()->where(
                 new \Zend_Db_Expr('TIME_TO_SEC(TIMEDIFF(CURRENT_TIMESTAMP, `updated_at`)) >= ' . $olderThan * 60)
             );
             $orders->getSelect()->where(
                 new \Zend_Db_Expr('TIME_TO_SEC(TIMEDIFF(CURRENT_TIMESTAMP, `updated_at`)) <= ' . $recentThan * 60)
             );
+            
             $orders->getSelect()->limit(10);
             $orders->setOrder('entity_id', 'DESC');
-
+            
             foreach ($orders->getItems() as $order) {
                 if (!$order->canCancel()) {
                     continue;
