@@ -14,11 +14,6 @@
  */
 namespace Kuzman\AutoOrderCancel\Helper;
 
-use Magento\Store\Model\ScopeInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\Escaper;
-
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     /**#@+
@@ -35,17 +30,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**#@-*/
 
     /**
-     * @var ScopeConfigInterface
+     * @var \Magento\Store\Model\ScopeInterface
      */
     protected $scopeConfig;
 
     /**
-     * @var StoreManagerInterface
+     * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
 
     /**
-     * @var Escaper
+     * @var -Magento\Framework\Escaper
      */
     protected $escaper;
 
@@ -55,14 +50,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $storeId;
 
     /**
-     * @param ScopeConfigInterface $scopeConfig
-     * @param StoreManagerInterface $storeManager
-     * @param Escaper $escaper
+     * @param \Magento\Store\Model\ScopeInterface $scopeConfig
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\Escaper $escaper
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig,
-        StoreManagerInterface $storeManager,
-        Escaper $escaper
+        \Magento\Store\Model\ScopeInterface $scopeConfig,
+        \StoreManagerInterface $storeManager,
+        \Magento\Framework\Escaper $escaper
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;

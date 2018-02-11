@@ -10,7 +10,7 @@
  * @category   Kuzman
  * @package    Kuzman_AutoOrderCancel
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
- * @author     Vladan Kuzmanovic
+ * @author     Vladan Kuzmanovic (vladan.kuzman@gmail.com)
  */
 namespace Kuzman\AutoOrderCancel\Cron;
 
@@ -31,22 +31,26 @@ class CancelOrders
      */
     protected $logger;
 
+    /**
+     * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $collectionFactory
+     * @param \Kuzman\AutoOrderCancel\Helper\Data $helper
+     * @param \Psr\Log\LoggerInterface $logger
+     */
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
+        \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $collectionFactory,
         \Kuzman\AutoOrderCancel\Helper\Data $helper,
-        \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $collectionFactory
+        \Psr\Log\LoggerInterface $logger    
     )
     {
+        $this->orderCollectionFactory = $collectionFactory;
         $this->helper = $helper;
         $this->logger = $logger;
-        $this->orderCollectionFactory = $collectionFactory;
     }
 
     /**
      * Order Cancel
      *
      * @return void
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function execute()
     {
@@ -82,6 +86,5 @@ class CancelOrders
                 }
             }
         }
-
     }
 }
