@@ -13,6 +13,7 @@
  * @author     Vladan Kuzmanovic (vladan.kuzman@gmail.com)
  */
 namespace Kuzman\AutoOrderCancel\Helper;
+use Magento\Store\Model\ScopeInterface;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
@@ -21,16 +22,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     const XML_PATH_AUTOORDERCANCEL_ENABLED = 'sales/autoordercancel/enabled';
     const XML_PATH_AUTOORDERCANCEL_ORDER_STATUSES = 'sales/autoordercancel/order_statuses';
+    const XML_PATH_AUTOORDERCANCEL_PAYMENT_METHODS = 'sales/autoordercancel/payment_methods';
     const XML_PATH_CANCEL_ORDERS_OLDER_THAN = 'sales/autoordercancel/older_than';
     const XML_PATH_CANCEL_ORDERS_RECENT_THAN = 'sales/autoordercancel/recent_than';
     const XML_PATH_CANCEL_ORDERS_COMMENT = 'sales/autoordercancel/comment';
 
-
-    //const XML_PATH_MSRP_EXPLANATION_MESSAGE_WHATS_THIS = 'sales/msrp/explanation_message_whats_this';
-    /**#@-*/
-
     /**
-     * @var \Magento\Store\Model\ScopeInterface
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     protected $scopeConfig;
 
@@ -50,13 +48,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $storeId;
 
     /**
-     * @param \Magento\Store\Model\ScopeInterface $scopeConfig
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Escaper $escaper
      */
     public function __construct(
-        \Magento\Store\Model\ScopeInterface $scopeConfig,
-        \StoreManagerInterface $storeManager,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Escaper $escaper
     ) {
         $this->scopeConfig = $scopeConfig;
@@ -108,6 +106,26 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return explode(',', $statuses);
+    }
+
+     /**
+     * Return Chosen Payment Methods Array
+     *
+     * @return array
+     */
+    public function getPaymentMethods()
+    {
+        $methods = $this->scopeConfig->getValue(
+            self::XML_PATH_AUTOORDERCANCEL_PAYMENT_METHODS,
+            ScopeInterface::SCOPE_STORE,
+            $this->storeId
+        );
+        
+        if (empty($methods)) {
+            return array();
+        }
+
+        return explode(',', $methods);
     }
 
     /**

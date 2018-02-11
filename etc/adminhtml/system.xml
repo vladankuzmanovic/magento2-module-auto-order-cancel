@@ -27,15 +27,19 @@
                     <label>Order Statuses to be Canceled</label>
                     <source_model>Kuzman\AutoOrderCancel\Model\Config\Source\Order\Status</source_model>
                 </field>
-                <field id="older_than" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="payment_methods" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Payment methods</label>
+                    <source_model>Kuzman\AutoOrderCancel\Model\Config\Source\Payment\Method</source_model>
+                </field>
+                <field id="older_than" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Cancel Orders Older Than (minutes)</label>
                     <validate>required-entry validate-digits</validate>
                 </field>
-                <field id="recent_than" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="recent_than" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Cancel Orders Recent Than (minutes)</label>
                     <validate>required-entry validate-digits</validate>
                 </field>
-                <field id="comment" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="comment" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Order History Comment</label>
                 </field>
             </group>
