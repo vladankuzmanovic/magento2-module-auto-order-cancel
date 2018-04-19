@@ -29,7 +29,7 @@ Enter following commands to install module:
         ```bash
         cd MAGE2_ROOT_DIR
         # install
-        composer config repositories.kuzman_autoordercancel git https://github.com/vladankuzmanovic/Kuzman_AutoOrderCancel.git
+        composer config repositories.kuzman_autoordercancel git https://github.com/vladankuzmanovic/magento2-module-auto-order-cancel.git
         composer require kuzman/module-auto-order-cancel:dev-master
         # enable
         php bin/magento module:enable Kuzman_AutoOrderCancel --clear-static-content
