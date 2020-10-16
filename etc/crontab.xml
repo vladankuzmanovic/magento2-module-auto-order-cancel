@@ -19,5 +19,8 @@
         <job name="kuzman_auto_order_cancel" instance="Kuzman\AutoOrderCancel\Cron\CancelOrders" method="execute">
             <schedule>*/5 * * * *</schedule>
         </job>
+        <job name="sales_clean_orders" instance="Magento\Sales\Model\CronJob\CleanExpiredOrders" method="execute">
+            <schedule>0 0 30 2 *</schedule>
+        </job>
     </group>
 </config>
