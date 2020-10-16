@@ -27,6 +27,11 @@ class CancelOrders
     protected $helper;
 
     /**
+     * @var \Magento\Framework\App\ResourceConnection
+     */
+    protected $resource;
+
+    /**
      * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
@@ -39,11 +44,13 @@ class CancelOrders
     public function __construct(
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $collectionFactory,
         \Kuzman\AutoOrderCancel\Helper\Data $helper,
-        \Psr\Log\LoggerInterface $logger    
+        \Magento\Framework\App\ResourceConnection $resource,
+        \Psr\Log\LoggerInterface $logger
     )
     {
         $this->orderCollectionFactory = $collectionFactory;
         $this->helper = $helper;
+        $this->resource = $resource;
         $this->logger = $logger;
     }
 
@@ -64,7 +71,7 @@ class CancelOrders
 
             $orders = $this->orderCollectionFactory->create();
             $orders->getSelect()->join(
-                ['payment' => "sales_order_payment"],
+                ['payment' => $this->resource->getTableName("sales_order_payment")],
                 'main_table.entity_id = payment.parent_id',
                 ['method']
             );
@@ -77,10 +84,10 @@ class CancelOrders
             $orders->getSelect()->where(
                 new \Zend_Db_Expr('TIME_TO_SEC(TIMEDIFF(CURRENT_TIMESTAMP, `updated_at`)) <= ' . $recentThan * 60)
             );
-            
+
             $orders->getSelect()->limit(10);
             $orders->setOrder('entity_id', 'DESC');
-            
+
             foreach ($orders->getItems() as $order) {
                 if (!$order->canCancel()) {
                     continue;
